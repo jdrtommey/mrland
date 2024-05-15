@@ -1,13 +1,11 @@
-#' @title readOzoneShock
-#' @description read Ozone shock
+#' @title readOzoneYieldShock
+#' @description read Ozone Yield Shock
 #' Data from the EAT-Lancet deepdive on Ozone shock effects on crop yields.
-#' Sources:
-#'  # TODO
-#' @return List of magpie objects with results on countrylevel, weight, unit and description.
+#' @return MAgPIE object with country level yield shock data for year 2050.
 #' @author Jake Tommey
 #' @examples
 #' \dontrun{
-#' readSource("OzoneShock")
+#' readSource("OzoneShock", convert = "onlycorrect")
 #' }
 #' @importFrom readxl read_xlsx
 

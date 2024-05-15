@@ -1,13 +1,13 @@
-#' @title readOzoneShock
-#' @description read Ozone shock
-#' Data from the EAT-Lancet deepdive on Ozone shock effects on crop yields.
-#' @return List of magpie objects with results on countrylevel, weight, unit and description.
+#' @title correctOzoneYieldShock
+#' @description correct Ozone Yield shock data
+#' @return x corrected magpie object containing all ISO countries
+#' @param x magpie object provided by the read function
 #' @author Jake Tommey
 #' @examples
 #' \dontrun{
-#' readSource("OzoneShock")
+#' readSource("OzoneShock", convert="onlycorrect")
 #' }
-#' @importFrom readxl read_xls
+#' @importFrom madrat toolGetMapping
 
 
 correctOzoneYieldShock <- function(x) {

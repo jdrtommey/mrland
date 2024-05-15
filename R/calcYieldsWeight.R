@@ -1,9 +1,6 @@
-#' @title calcYields
+#' @title calcYieldsWeight
 #'
-#' @description This function extracts yields from LPJmL
-#'              and transforms them to MAgPIE crops calibrating proxy crops
-#'              to FAO yields. Optionally, ISIMIP yields can be returned.
-#'
+#' @description This function calculates the crop area weightings to use for yields.
 #' @param weighting     use of different weights (totalCrop (default),
 #'                      totalLUspecific, cropSpecific, crop+irrigSpecific,
 #'                      avlCropland, avlCropland+avlPasture)
@@ -13,7 +10,6 @@
 #'                or suitability under rainfed conditions including currently irrigated land (rainfed_and_irrigated)
 #'                should be used. Options combined via ":"
 #'                The different marginal land options are:
-#' @param cells         if cellular is TRUE: "magpiecell" for 59199 cells or "lpjcell" for 67420 cells
 #' \itemize{
 #' \item \code{"all_marginal"}: All marginal land (suitability index between 0-0.33) is included as suitable
 #' \item \code{"q33_marginal"}: The bottom tertile (suitability index below 0.13) of the
@@ -29,20 +25,22 @@
 #'                        "q33_marginal:rainfed_and_irrigated" and
 #'                        "no_marginal:rainfed_and_irrigated" in a magclass object to be used as magpie input.
 #' }
-#' @param yields
+#' @param cells         if cellular is TRUE: "magpiecell" for 59199 cells or "lpjcell" for 67420 cells
+#' @param yields magpie object containing the yields
 #' @return magpie object in cellular resolution
 #'
 #' @author Kristine Karstens, Felicitas Beier
 #'
 #' @examples
 #' \dontrun{
-#' calcOutput("YieldsWeight", aggregate = FALSE)
+#' calcOutput("YieldsWeight", yields, aggregate = FALSE)
 #' }
 #'
 #' @importFrom magpiesets findset
 #' @importFrom magclass getYears add_columns dimSums time_interpolate
 #' @importFrom madrat toolFillYears toolGetMapping toolTimeAverage
-#' @importFrom mrcommons toolLPJmLVersion toolHarmonize2Baseline
+#' @importFrom mstools toolHarmonize2Baseline
+#' @importFrom mrlandcore toolLPJmLVersion
 #' @importFrom stringr str_split
 #' @importFrom withr local_options
 
