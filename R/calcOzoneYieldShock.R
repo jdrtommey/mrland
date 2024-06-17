@@ -74,7 +74,8 @@ calcOzoneYieldShock <- function(
     "YieldsWeight",
     yields = yieldShock,
     weighting = weighting,
-    marginal_land = marginal_land
+    marginal_land = marginal_land,
+    aggregate = FALSE
   )
 
   yieldShock <- yieldShock[, , intersect(getItems(yieldShock, dim = 3), getItems(cropAreaWeights, dim = 3))]

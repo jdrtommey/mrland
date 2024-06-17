@@ -208,7 +208,8 @@ calcYields <- function(source = c(lpjml = "ggcmi_phase3_nchecks_9ca735cb", isimi
     yields = yields,
     cells = cells,
     weighting = weighting,
-    marginal_land = marginal_land
+    marginal_land = marginal_land,
+    aggregate = FALSE
   )
 
   # Special case for India case study
