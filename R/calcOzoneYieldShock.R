@@ -77,7 +77,6 @@ calcOzoneYieldShock <- function(
     aggregate = FALSE
   )
 
-  yieldShock <- yieldShock[, , intersect(getItems(yieldShock, dim = 3), getItems(cropAreaWeights, dim = 3))]
   return(
     list(
       x = yieldShock,
