@@ -44,7 +44,12 @@
 #' @importFrom stringr str_split
 #' @importFrom withr local_options
 
-calcYieldsWeight <- function(yieldNames, yieldCells, cells = "lpjcell", weighting = "totalCrop", marginal_land = "magpie") { # nolint
+calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", marginal_land = "magpie") { # nolint
+
+  yieldNames <- toolGetMapping("MAgPIE_LPJmL.csv", type="sectoral", where = "mappingfolder")$MAgPIE
+  isos <- toolGetMappingCoord2Country()
+  yieldCells <- paste(isos$coords, isos$iso, sep = ".")
+
 
   # Weight for spatial aggregation
   if (weighting == "totalCrop") {
@@ -66,7 +71,8 @@ calcYieldsWeight <- function(yieldNames, yieldCells, cells = "lpjcell", weightin
 
       cropAreaWeight <- new.magpie(cells_and_regions = yieldCells,
                                    years = NULL,
-                                   names = yieldNames,
+                                   names = c(paste(yieldNames, "irrigated", sep = "."),
+                                             paste(yieldNames, "rainfed", sep = ".")),
                                    fill = NA)
       cropAreaWeight[, , findset("kcr")] <- crop + 10^-10
       cropAreaWeight[, , "pasture"]      <- mbind(setNames(past + 10^-10, "irrigated"),
@@ -125,7 +131,7 @@ calcYieldsWeight <- function(yieldNames, yieldCells, cells = "lpjcell", weightin
 
   return(list(x            = cropAreaWeight,
               weight       = NULL,
-              unit         = "ha",
+              unit         = "Mha",
               description  = "Yields in tons per hectar for different crop types.",
               isocountries = FALSE))
 }

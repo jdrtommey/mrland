@@ -33,7 +33,7 @@
 #' @importFrom mstools toolGetMappingCoord2Country
 
 calcOzoneYieldShock <- function(
-  weighting = "totalcrop",
+  weighting = "totalCrop",
   marginal_land = "magpie" #nolint
 ) {
   shocks <- readSource("OzoneYieldShock", convert = "onlycorrect")
@@ -72,8 +72,6 @@ calcOzoneYieldShock <- function(
 
   cropAreaWeights <- calcOutput(
     "YieldsWeight",
-    yieldNames = names(yieldShock),
-    yieldCells = getCells(yieldShock),
     weighting = weighting,
     marginal_land = marginal_land,
     aggregate = FALSE
