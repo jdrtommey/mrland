@@ -72,7 +72,8 @@ calcOzoneYieldShock <- function(
 
   cropAreaWeights <- calcOutput(
     "YieldsWeight",
-    yields = yieldShock,
+    yieldNames = names(yieldShock),
+    yieldCells = getCells(yieldShock),
     weighting = weighting,
     marginal_land = marginal_land,
     aggregate = FALSE

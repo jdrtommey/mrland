@@ -205,7 +205,8 @@ calcYields <- function(source = c(lpjml = "ggcmi_phase3_nchecks_9ca735cb", isimi
 
   cropAreaWeight <- calcOutput(
     "YieldsWeight",
-    yields = yields,
+    yieldNames = names(yields),
+    yieldCells = getCells(yields),
     cells = cells,
     weighting = weighting,
     marginal_land = marginal_land,
