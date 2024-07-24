@@ -46,7 +46,7 @@
 
 calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", marginal_land = "magpie") { # nolint
 
-  yieldNames <- toolGetMapping("MAgPIE_LPJmL.csv", type="sectoral", where = "mappingfolder")$MAgPIE
+  yieldNames <- toolGetMapping("MAgPIE_LPJmL.csv", type = "sectoral" , where = "mappingfolder")$MAgPIE
   isos <- toolGetMappingCoord2Country()
   yieldCells <- paste(isos$coords, isos$iso, sep = ".")
 
@@ -57,7 +57,7 @@ calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", margina
     cropAreaWeight <- dimSums(calcOutput("Croparea", sectoral = "kcr", physical = TRUE, irrigation = FALSE,
                                          cellular = TRUE, cells = cells, aggregate = FALSE,
                                          years = "y1995", round = 6),
-                              dim = 3)
+                              dim = 3) + 10e-10
 
   } else if (weighting %in% c("totalLUspecific", "cropSpecific", "crop+irrigSpecific")) {
 
@@ -74,9 +74,9 @@ calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", margina
                                    names = c(paste(yieldNames, "irrigated", sep = "."),
                                              paste(yieldNames, "rainfed", sep = ".")),
                                    fill = NA)
-      cropAreaWeight[, , findset("kcr")] <- crop + 10^-10
-      cropAreaWeight[, , "pasture"]      <- mbind(setNames(past + 10^-10, "irrigated"),
-                                                  setNames(past + 10^-10, "rainfed"))
+      cropAreaWeight[, , findset("kcr")] <- crop + 10e-10
+      cropAreaWeight[, , "pasture"]      <- mbind(setNames(past + 10e-10, "irrigated"),
+                                                  setNames(past + 10e-10, "rainfed"))
 
     } else if (weighting == "cropSpecific") {
 
@@ -85,17 +85,17 @@ calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", margina
                                    names = yieldNames,
                                    fill = NA)
 
-      cropAreaWeight[, , findset("kcr")] <- dimSums(crop, dim = 3.1) + 10^-10
-      cropAreaWeight[, , "pasture"]      <- past + 10^-10
+      cropAreaWeight[, , findset("kcr")] <- dimSums(crop, dim = 3.1) + 10e-10
+      cropAreaWeight[, , "pasture"]      <- past + 10e-10
 
     } else {
 
       cropAreaWeight <- new.magpie(cells_and_regions = yieldCells,
                                    years = NULL,
                                    names = yieldNames,
-                                   fill = (dimSums(crop, dim = 3) + 10^-10))
+                                   fill = (dimSums(crop, dim = 3) + 10e-10))
 
-      cropAreaWeight[, , "pasture"] <- past + 10^-10
+      cropAreaWeight[, , "pasture"] <- past + 10e-10
 
     }
 
@@ -103,7 +103,7 @@ calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", margina
 
     cropAreaWeight <- setNames(calcOutput("AvlCropland", marginal_land = marginal_land, cells = cells,
                                           country_level = FALSE, aggregate = FALSE),
-                               NULL)
+                               NULL) + 10e-10
 
   } else if (weighting == "avlCropland+avlPasture") {
 
@@ -120,7 +120,7 @@ calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", margina
 
     cropAreaWeight[, , "pasture"] <- pmax(avlCrop,
                                           dimSums(lu1995[, , c("primforest", "secdforest", "forestry", "past")],
-                                                  dim = 3))
+                                                  dim = 3)) + 10e-10
 
   } else {
 
