@@ -46,7 +46,7 @@
 
 calcYieldsWeight <- function(cells = "lpjcell", weighting = "totalCrop", marginal_land = "magpie") { # nolint
 
-  yieldNames <- toolGetMapping("MAgPIE_LPJmL.csv", type = "sectoral" , where = "mappingfolder")$MAgPIE
+  yieldNames <- toolGetMapping("MAgPIE_LPJmL.csv", type = "sectoral", where = "mappingfolder")$MAgPIE
   isos <- toolGetMappingCoord2Country()
   yieldCells <- paste(isos$coords, isos$iso, sep = ".")
 
