@@ -5,15 +5,12 @@
 \title{calcYieldsWeight}
 \usage{
 calcYieldsWeight(
-  yields,
   cells = "lpjcell",
   weighting = "totalCrop",
   marginal_land = "magpie"
 )
 }
 \arguments{
-\item{yields}{magpie object containing the yields}
-
 \item{cells}{if cellular is TRUE: "magpiecell" for 59199 cells or "lpjcell" for 67420 cells}
 
 \item{weighting}{use of different weights (totalCrop (default),

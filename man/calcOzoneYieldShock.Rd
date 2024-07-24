@@ -4,7 +4,7 @@
 \alias{calcOzoneYieldShock}
 \title{calcOzoneYieldShock}
 \usage{
-calcOzoneYieldShock(weighting = "totalcrop", marginal_land = "magpie")
+calcOzoneYieldShock(weighting = "totalCrop", marginal_land = "magpie")
 }
 \arguments{
 \item{weighting}{use of different weights (totalCrop (default),
