@@ -25,8 +25,6 @@
 #'                        "q33_marginal:rainfed_and_irrigated" and
 #'                        "no_marginal:rainfed_and_irrigated" in a magclass object to be used as magpie input.
 #' }
-#' @param cells         if cellular is TRUE: "magpiecell" for 59199 cells or "lpjcell" for 67420 cells
-#' @param yields magpie object containing the yields
 #' @return magpie object in cellular resolution
 #'
 #' @author Kristine Karstens, Felicitas Beier
